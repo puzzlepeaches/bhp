@@ -29,7 +29,13 @@ def parse_userfile(userfile):
     with open(userfile, "r") as f:
         users = json.load(f)
 
-        for user in users["data"]:
+        try:
+            if users["data"]:
+                key = "data"
+        except KeyError:
+            key = "users"
+
+        for user in users[key]:
             singleuser = {}
             try:
                 if (
